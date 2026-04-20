@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #https://github.com/emanueleumberto/its_agnesi_data4
 # Operatori
 # - Operatori di assegnamento [=]
