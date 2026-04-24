@@ -16,40 +16,89 @@
 # - Calcola e stampa il prezzo medio dei libri presenti nel catalogo.
 # - Trova e stampa il libro più costoso nel catalogo.
 # - Poiché le tuple sono immutabili, spiega in un commento come 
-#   potresti aggiornare il prezzo di un libro 
+#   potresti aggiornare il prezzo di un libro
 
-libro1 = ("Il Signore degli Anelli", "J.R.R. Tolkien", 1954, 29.99)
-libro2 = ("1984", "George Orwell", 1949, 19.99)
-libro3 = ("Il Grande Gatsby", "F. Scott Fitzgerald", 1925, 14.99)
-libro4 = ("Harry Potter e la Pietra Filosofale", "J.K. Rowling", 1997, 24.99)
-libro5 = ("Il Codice da Vinci", "Dan Brown", 2003, 22.99)   
-catalogo = [libro1, libro2, libro3, libro4, libro5]
+catalogo = [
+    ("Il Signore degli Anelli", "J.R.R. Tolkien", 1954, 29.99),
+    ("1984", "George Orwell", 1949, 19.99),
+    ("Il Grande Gatsby", "F. Scott Fitzgerald", 1925, 14.99),
+    ("Harry Potter e la Pietra Filosofale", "J.K. Rowling", 1997, 24.99),
+    ("Il Codice Da Vinci", "Dan Brown", 2003, 22.99)
+]
+
+catalogo = tuple(catalogo)
 for libro in catalogo:
-    print(f"Titolo: {libro[0]}, Autore: {libro[1]}, Anno: {libro[2]}, Prezzo: {libro[3]}") 
-anno = int(input("Inserisci un anno: "))
-print(f"Libri pubblicati dopo il {anno}:")
+    titolo, autore, anno, prezzo = libro # unpacking della tupla
+    print(f"Titolo: {titolo}, Autore: {autore}, Anno: {anno}, Prezzo: {prezzo}")
+
+anno_input = int(input("Inserisci un anno per vedere i libri pubblicati dopo quell'anno: "))
+libri_trovati = False
+print(f"Libri pubblicati dopo {anno_input}:")
 for libro in catalogo:
-    if libro[2] > anno:
-        print(f"Titolo: {libro[0]}, Autore: {libro[1]}, Anno: {libro[2]}, Prezzo: {libro[3]}")
-    else:
-        print(f"Nessun libro trovato pubblicato dopo il {anno}.")
-        
-autore = input("Inserisci il nome di un autore: ")
-print(f"Libri scritti da {autore}:")
+    titolo, autore, anno, prezzo = libro
+    if anno > anno_input:
+        print(f" Titolo: {titolo}, Autore: {autore}, Anno: {anno}, Prezzo: {prezzo}")
+        libri_trovati = True
+
+if not libri_trovati:
+    print(f"Nessun libro trovato pubblicato dopo l'anno {anno_input}.")
+
+autore_input = input("Inserisci il nome di un autore per vedere i suoi libri: ").strip().lower()
+libri_trovati = False
+print(f"Libri scritti da {autore_input}:")
 for libro in catalogo:
-    if libro[1].lower() == autore.lower():
-        print(f"Titolo: {libro[0]}, Autore: {libro[1]}, Anno: {libro[2]}, Prezzo: {libro[3]}")  
-    else: 
-        print(f"Nessun libro trovato per l'autore {autore}.")
-prezzi = [libro[3] for libro in catalogo]
-prezzo_medio = sum(prezzi) / len(prezzi)     
-print(f"Prezzo medio dei libri:{prezzo_medio} $", )
-prezzo_più_alto = max(prezzi)
+    titolo, autore, anno, prezzo = libro
+    if autore.lower() == autore_input.lower():
+        print(f"Titolo: {titolo}, Autore: {autore}, Anno: {anno}, Prezzo: {prezzo}")
+        libri_trovati = True
+
+if not libri_trovati:
+    print(f"Nessun libro trovato per l'autore {autore_input}.")
+  
+print("--------------------------")
+   
+prezzo_totale = 0
 for libro in catalogo:
-    if libro[3] == prezzo_più_alto:
-        print(f"Il libro più costoso è: Titolo: {libro[0]}, Autore: {libro[1]}, Anno: {libro[2]}, Prezzo: {libro[3]}")
-        
+    prezzo_totale += libro[3]
+
+prezzo_medio = float(prezzo_totale) / len(catalogo)
+print(f"Prezzo medio dei libri: {prezzo_medio:.2f}")
+
+print("--------------------------")
 
 
-# Per aggiornare il prezzo di un libro, poiché le tuple sono immutabili,
-# potresti convertire la tupla in una lista, modificare il prezzo e poi riconvertirla in tupla.
+libro_piu_costoso = catalogo[0]
+for libro in catalogo:
+    if libro[3] > libro_piu_costoso[3]:
+        libro_piu_costoso = libro
+print(f"Il libro più costoso è: Titolo: {libro_piu_costoso[0]}, Autore: {libro_piu_costoso[1]}, Anno: {libro_piu_costoso[2]}, Prezzo: {libro_piu_costoso[3]}")
+
+# Poiché le tuple sono immutabili, per aggiornare il prezzo di un libro,
+# potremmo creare una nuova tupla con le stesse informazioni del libro originale,
+# ma con il prezzo aggiornato, e poi sostituire la tupla originale nella lista del catalogo con quella nuova.
+# Ad esempio, se volessimo aggiornare il prezzo del primo libro, potremmo fare qualcosa del genere:
+# nuovo_prezzo = 34.99
+# libro_aggiornato = (catalogo[0][0], catalogo[0
+#   ][1], catalogo[0][2], nuovo_prezzo)
+# catalogo[0] = libro_aggiornato
+#   In questo modo, abbiamo creato una nuova tupla con il prezzo aggiornato e l'abbiamo sostituita nella lista del catalogo.
+# Tuttavia, poiché le tuple sono immutabili, non possiamo modificare direttamente il prezzo all'interno della tupla originale.
+
+
+# Soluzione 1
+vecchio_libro = catalogo[0]
+nuovo_libro = list(vecchio_libro)
+nuovo_libro[3] = 9.99
+vecchio_libro = tuple(nuovo_libro)
+print(vecchio_libro)
+
+# Soluzione 2
+vecchio_libro = (vecchio_libro[0], vecchio_libro[1], vecchio_libro[2], 9.99)
+print(vecchio_libro)
+
+
+
+
+
+
+

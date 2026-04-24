@@ -1,11 +1,11 @@
 # Collection
 # List | Tuple | Set | Dictionary
 # - List: Collezioni di dati ORDINATE, MODIFICABILI e permettono duplicati.
-# -> v = ['Roma', 'Milano', 'Napoli']
+# -> v = ['Roma', 'Milano', 'Napoli'] indicate da []
 # - Tuple: Collezioni di dati ORDINATE, IMMUTABILI e permettono duplicati.
-# -> v = ('Roma', 'Milano', 'Napoli')
+# -> v = ('Roma', 'Milano', 'Napoli') indicate da ()
 # - Set: Collezioni di dati NON ORDINATE e per questo non indicizzabili, 
-#        non modificabili e non permettono duplicati
+#        non modificabili e non permettono duplicati indicati da {}
 # -> v = {'Roma', 'Milano', 'Napoli'}
 # - Dictonary: Collezioni di dati ORDINATE e modificabili ma non permettono duplicati
 # -> v = {"nome": "Mario", "cognome": "Rossi", "citta": "Roma"}
