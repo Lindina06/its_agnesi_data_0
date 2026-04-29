@@ -58,6 +58,7 @@ print(floatRand)
 # pip --version -> Verifica la presenza di pip installata
 
 from genuine.fake import GenuineFake as gf
+
 print(gf.first_name())
 print(gf.last_name())
 print(gf.book())
